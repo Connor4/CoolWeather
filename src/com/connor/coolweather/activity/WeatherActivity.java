@@ -1,6 +1,7 @@
 package com.connor.coolweather.activity;
 
 import com.connor.coolweather.R;
+import com.connor.coolweather.service.AutoUpdateService;
 import com.connor.coolweather.util.HttpCallbackListener;
 import com.connor.coolweather.util.HttpUtil;
 import com.connor.coolweather.util.Utility;
@@ -192,7 +193,6 @@ public class WeatherActivity extends Activity implements OnClickListener
 	{
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		Log.d("TAG", "NAME" + prefs.getString("city_name", ""));
 		cityNameText.setText(prefs.getString("city_name", ""));
 		temp1Text.setText(prefs.getString("temp1", ""));
 		temp2Text.setText(prefs.getString("temp2", ""));
@@ -201,5 +201,7 @@ public class WeatherActivity extends Activity implements OnClickListener
 		currentDateText.setText(prefs.getString("current_date", ""));
 		weatherInfoLayout.setVisibility(View.VISIBLE);
 		cityNameText.setVisibility(View.VISIBLE);
+		Intent intent = new Intent(this, AutoUpdateService.class);
+		startService(intent);
 	}
 }
