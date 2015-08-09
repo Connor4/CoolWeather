@@ -12,6 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class CoolWeatherDB
 {
@@ -59,7 +60,7 @@ public class CoolWeatherDB
 	/**
 	 * 从数据库读取全国所有省份信息
 	 */
-	public List<Province> loadProvince()
+	public List<Province> loadProvinces()
 	{
 		List<Province> list = new ArrayList<Province>();
 		Cursor cursor = db
@@ -91,11 +92,12 @@ public class CoolWeatherDB
 			values.put("city_name", city.getCityName());
 			values.put("city_code", city.getCityCode());
 			values.put("province_id", city.getProvinceId());
+			db.insert("City", null, values);
 		}
 	}
-
+	
 	/**
-	 * 从数据库读取某省下所有的城市信息
+	 * 从数据库读取某省下所有的城市信息。
 	 */
 	public List<City> loadCities(int provinceId)
 	{
@@ -113,6 +115,7 @@ public class CoolWeatherDB
 				city.setCityCode(cursor.getString(cursor
 						.getColumnIndex("city_code")));
 				city.setProvinceId(provinceId);
+				list.add(city);
 			} while (cursor.moveToNext());
 		}
 		return list;
