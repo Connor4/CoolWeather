@@ -192,6 +192,7 @@ public class WeatherActivity extends Activity implements OnClickListener
 	{
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
+		Log.d("TAG", "NAME" + prefs.getString("city_name", ""));
 		cityNameText.setText(prefs.getString("city_name", ""));
 		temp1Text.setText(prefs.getString("temp1", ""));
 		temp2Text.setText(prefs.getString("temp2", ""));
